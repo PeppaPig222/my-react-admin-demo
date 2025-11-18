@@ -17,6 +17,11 @@ export interface LoginParams {
     password:string;
 }
 
+// 登录表单组件props类型
+export interface LoginFormProps {
+    onLogin: (params:LoginParams) => Promise<void>; // 登录回调函数
+    loading?:boolean; // 加载状态
+}
 // 登录响应类型
 export interface LoginResult {
     code: number;
