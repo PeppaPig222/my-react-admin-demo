@@ -1,17 +1,25 @@
 /* 新拟态设计 */
 :root {
-  --nue-1: #ecf0f3; /* 新拟态浅色（凸起的高光） */
+  --nue-1: #f1f4f6; /* 新拟态浅色（凸起的高光） */
   --nue-2: #d1d9e6; /* 新拟态深色（凸起的阴影） */
-  --white: #f9f9f9; /* 暖白色（背景色） */
-  --gray: #a0a5a8; /* 中灰色文字 */
+  --white: #fffefe; /* 暖白色（背景色） */
+  --gray: #898a8b; /* 中灰色文字 */
   --black: #181818; /* 深黑色主要文字 */
   --purple: #4b70e2; /* 紫色主题色 */
-  --transition: 0.25s; /* 动画过渡效果时间 */
+  --transition: 1.25s; /* 动画过渡效果时间 */
 }
 * {
   user-select: none; /* 禁止用户选择文本，提升体验 */
 }
-
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--nue-1);
+  color: var(--black);
+}
 /* 登录容器 */
 .login-container {
   width: 100%;
@@ -27,112 +35,285 @@
 }
 
 /* 登录卡片 */
-.login-card {
-  min-height: 100dvh;
+.main {
+  position: relative;
   width: 100%;
-  max-width: 420px;
-  min-height: 500px;
-  padding: 40px 35px;
+  max-width: 1000px;
+  min-width: 1000px;
+  height: 500px;
   background-color: var(--nue-1);
   /* 新拟态阴影效果,向右下深阴影，左上浅投影 */
   box-shadow: 10px 10px 10px var(--nue-2), -10px -10px 10px var(--white);
   border-radius: 20px;
-  overflow: hidden;
+  overflow: hidden; /* 关键：隐藏溢出内容 */
+  transition: var(--transition);
 }
-
-/* 卡片头部 */
-.login-header {
-  text-align: center;
-  margin-bottom: 40px; /* 底部外边距 */
-}
-.login-header h1 {
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 3;
-  color: var(--black);
-}
-.login-header h1::first-letter {
-  text-transform: uppercase; /* 首字母大写 */
-}
-.login-header p {
-  font-size: 14px;
-  letter-spacing: 0.25px; /* 字母间距 */
-  text-align: center;
-  line-height: 1.6;
-  color: var(--gray);
-}
-
-/* 表单布局 */
-.login-form {
+/* ==================== 表单容器 ========================= */
+.container {
+  position: absolute;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  padding: 40px;
+  background-color: var(--nue-1);
+  transition: var(--transition);
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; /* 垂直布局 */
+}
+/* 左侧表单登陆容器 */
+.a-container {
+  /* 从右边开始，宽度 600px */
+  left:40%;
+  z-index: 100;
+}
+/* 右侧表单注册容器 */
+.b-container {
+  left: 0;
+  /* 在登录表单下面 */
+  z-index: 0;
+}
+/* ==================== 表单样式 ========================= */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  max-width: 400px;
+}
+/* 表单标题 */
+.form-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: var(--black);
+  text-align: center;
+}
+/* 表单输入框 */
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0;
+  font-size: 13px;
+  letter-spacing: .15px;
+  border: none;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  color: var(--black);
+  border-radius: 8px;
+  background-color: var(--nue-1)!important;
+  box-shadow: 
+    inset 2px 2px 4px var(--nue-2), 
+    inset -2px -2px 4px var(--white);
+  transition: var(--transition); 
 }
 
-/* 输入框组 */
-.input-group {
+.form-input:focus {
+  box-shadow: 
+    inset 6px 6px 4px var(--nue-2), 
+    inset -6px -6px 4px var(--white);
+}
+
+.password-input-group {
   position: relative;
   width: 100%;
-  margin: 8px 0;
 }
-.input-icon {
-  position: absolute;
-  left: 15px;
-  top: 50%; /* 垂直居中 */
+.password-input-group .form-inout{
+  margin:0;
+  padding-right: 45px;
+}
+.password-toggle {
+  position:absolute;
+  right:15px;
+  top:50%;
   transform: translateY(-50%);
-  color: var(--gary);
-  opacity: 0.5;
-  font-size: 16px;
-  z-index: 2;
-  transition: var(--transition); /* 过渡动画 */
+  border:none;
+  cursor:pointer;
+  z-index: 100;
+  color: grey;
 }
-.input-group:focus-within .input-icon {
-  /* 输入框内点击或聚焦时：图标变为紫色、完全不透明 */
-  opacity: 1;
-  color: var(--purple);
-}
-
-/* 输入框 */
-.input-group input {
-  width: 100%;
-  height: 45px;
-  padding-left: 45px; /* 左侧内边距,给图标留空间*/
-  padding-right: 45px;/* 左侧内边距，给眼睛留空间*/
-  font-size: 13px;
-  letter-spacing:.15px; /* 字母间距 */
-  border: none; /* 去除默认的边框 */
-  outline: none;  /* 去除默认的聚焦边框 */
-  font-family: 'Montserrat', sans-serif;
-  background-color: var(--nue-1);
-  transition: var(--transition);
-  border-radius: 8px;
-  box-shadow: 
-  inset 2px 2px 4px var(--nue-2),  /* 内阴影，向右下深阴影 */
-  inset -2px -2px 4px var(--white);  /* 内阴影，向左上浅阴影 */
+.password-toggle:hover {
   color: var(--black);
 }
-.input-group input:focus {
-    box-shadow: 
-    inset 5px 5px 5px var(--nue-2), /* 聚焦时阴影更深 */
-    inset -5px -5px 5px var(--white); /* 聚焦时高光更亮 */
+.password-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
-.input-group input::placeholder {
-    color: var(--gray); /* 提示文字颜色 */
-    opacity:  0.7;
+.forgot-password {
+  font-size: 12px;
+  color: var(--black);
+  display: inline-block;
+  margin-top: 15px;
+  margin-left: 0;
+  padding-bottom: 5px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--black);
 }
-.input-group input:disabled {
-    opacity: 0.6;  /* 禁用时文字变淡 */
-    cursor: not-allowed; /* 禁用时鼠标变为禁止符号 */
+.form-button {
+  width:180px;
+  height: 50px;
+  border-radius: 25px;
+  margin-top: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2.15px;
+  color: var(--white);
+  border: none;
+  outline:none;
+  background-color: var(--purple);
+  cursor: pointer;
+  box-shadow:
+    8px 8px 16px var(--nue-2),
+    -8px -8px 16px var(--white);
+
+}
+/* ==================== 切换面板 ========================= */
+.switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top:0;
+  left:0;/* 初始在左侧 */
+  width:400px;
+  height:100%;
+  overflow:hidden;
+  z-index:200;
+  padding: 50px;
+  transition: var(--transition);
+  background-color: var(--nue-1);
+  box-shadow: 
+    4px 4px 10px var(--nue-2),
+    -4px -4px 10px var(--white);
+}
+/* 切换面板圆形装饰 - 第一个圆圈 */
+.switch-circle {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background-color: var(--nue-1);
+  box-shadow: 
+    inset 4px 4px 10px var(--nue-2),
+    inset -4px -4px 10px var(--white);
+  bottom: -70%;
+  left: -50%;
+  transition: var(--transition);
+  z-index: 1;
+}
+/* 切换注册模式时，第一个圆圈移动到右上角 */
+.main.is-txr .switch-circle {
+  bottom:-30%;
+  left:60%;
+  width: 300px;
+  height: 300px;
+} 
+/* 切换面板圆形装饰 - 第二个圆圈 */
+.switch-circle1 {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: var(--nue-1);
+  box-shadow: 
+    inset 4px 4px 10px var(--nue-2),
+    inset -4px -4px 10px var(--white);
+  top: -35%;
+  right: -35%;
+  transition: var(--transition);
+  z-index: 1;
+}
+/* 切换注册模式时，第二个圆圈移动到左下角 */
+.main.is-txr .switch-circle1{
+  top:-40%;
+  right:40%;
+  width: 300px;
+  height: 300px;
+} 
+/* 切换面板内容容器 */
+.switch-container {
+  position: absolute;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width:400px;
+  padding: 50px 55px;
+  transition: var(--transition);
+  top: 0;
+  height: 100%;
+}
+/* 左侧内容 */
+.switch-container.left {
+  left:0;
+  transform: translateX(-100%);
+}
+/* 右侧内容 */
+.switch-container.right {
+  right:0;
+  transform: translateX(0);
+}
+/* ==================== 切换动画========================= */
+/* 当切换到注册模式时（isSignup = true） */
+.main.is-txr .switch {
+  left: calc(100% - 400px);
+}
+.main.is-txr .switch-container.left {
+  transform: translateX(0);
+}
+/* 右侧内容滑出隐藏 */
+.main.is-txr .switch-container.right {
+  transform: translateX(100%);
+}
+/* 登录表单向右滑出 */
+.main.is-txr .a-container {
+  transform: translateX(100%);
+}
+.main.is-txr .b-container {
+  z-index: 100;
 }
 
-/* 密码显示切换按钮 */
-.password-toggle {
-    position: absolute;
-    right:15px;
-    top:50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
+.switch-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 20px;
+}
+
+.switch-description {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 30px;
+}
+.switch-button {
+  width:180px;
+  height: 50px;
+  border-radius: 25px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2.15px;
+  color: var(--white);
+  border: none;
+  outline:none;
+  background-color: var(--purple);
+  cursor: pointer;
+  box-shadow:
+    8px 8px 16px var(--nue-2),
+    -8px -8px 16px var(--white);
+  transition: all 0.3s ease;
+}
+.switch-button:hover {
+  box-shadow:
+    6px 6px 10px var(--nue-2),
+    -6px -6px 10px var(--white);
+  transform: scale(0.98);
+}
+.switch-button:active { 
+  box-shadow:
+    6px 6px 10px var(--nue-2),
+    -6px -6px 10px var(--white);
+  transform: scale(0.97);
 }
