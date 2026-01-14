@@ -53,7 +53,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({children}) => {
     <Layout style={{ minHeight: '100vh' }}>
       {/* ========== 左侧边栏 ========== */}
       <Sider theme='light' width={240}
-        style={{backgroundColor: '#fffefe', borderRadius: '12px'}}
+        style={{backgroundColor: '#fffefe', borderRadius: '12px 12px 0 0'}}
       >
         <div style={{
           height: 200,
@@ -75,7 +75,16 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({children}) => {
           <div style={{ fontSize: 16, fontWeight: 'bold', color: '#181818' }}>
             {currentUser?.name || '未登录'}
           </div>
-          <Tag color='default' style={{ margin: 10 }}>{currentUser?.role || '未登录'}</Tag>
+          <Tag color='default'
+            style={{ 
+              margin: 10,
+              cursor: currentUser ? 'default':'pointer',
+              transition: 'all 0.3s ease',
+            }}
+            onClick={() => !currentUser && navigate('/login')}
+          >
+              {currentUser?.role || '请登录'}
+          </Tag>
         </div>
         <Menu
           theme='light'
