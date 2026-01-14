@@ -2,7 +2,7 @@ import { create } from "zustand"; // 引入Zustand 创建 store 函数
 //“把 store 里的状态自动同步到本地存储（localStorage / sessionStorage / IndexedDB…），页面刷新后自动恢复，不写一行额外逻辑。”
 import { persist } from "zustand/middleware"; // 引入持久化中间件
 import { login as loginApi, logout as logoutApi, getCurrentUser} from '@/services/auth'; 
-import type { LoginParams, User } from '@/types';// 引入登录、登出、获取当前用户API
+import type { LoginParams, User } from '@/interface';// 引入登录、登出、获取当前用户API
 
 /**
  * 用户登陆状态的管理中心

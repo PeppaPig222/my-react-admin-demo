@@ -11,7 +11,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({children}) => {
             display: 'flex',    
             flexDirection: 'column', // 垂直布局
             minHeight: '100vh', // 最小高度为视口高度（整个屏幕）
-            background: '#f0f2f5', // 浅灰色背景
+            background: '#f1f4f6', // 浅灰色背景
         }}>
             {/* 内容区域 */}
             <div style={{
@@ -28,7 +28,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({children}) => {
                 padding: '24px 0', // 内边距24px 0
                 color: '#999',
             }}>
-                React Admin Demo © 2025 yuchen
+                React Admin Demo © 2026 yuchen
             </footer>
         </div>
     )

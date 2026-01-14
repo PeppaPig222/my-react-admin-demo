@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import type { LoginParams, LoginFormProps } from "@/types";
+import type { LoginParams, LoginFormProps } from "@/interface";
 import "./LoginForm.css";
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLogin, loading = false }) => {

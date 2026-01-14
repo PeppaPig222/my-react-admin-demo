@@ -3,10 +3,11 @@ import { Navigate } from "react-router-dom";
 import type { RouteObject } from "react-router-dom"; //RouteObject 是 TypeScript 类型，需要使用 type 导入
 import { Spin } from "antd"; // 引入antd 的 Spin 组件
 import BasicLayout from "@/components/Layout/BasicLayout"; // 引入用户布局组件
-
+import AdminLayout from "@/components/Layout/AdminLayout"; // 引入管理员布局组件
 // ========== 懒加载页面组件 ==========
 const Login = lazy(() => import("@/pages/Login")); // 懒加载登录页面组件
 const Dashboard = lazy(() => import("@/pages/Dashboard"));
+const UserList = lazy(() =>import("@/pages/UserList"));
 
 //pageLoading 变量（此处不能为组件）
 //Fast Refresh (Vite 的热更新机制) 有一个规则：
@@ -28,29 +29,34 @@ const routes: RouteObject[] = [
   {
     path: "/login",
     element: (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-      }}>
+      <BasicLayout>
         <Suspense fallback={pageLoading}>
-        {/* 懒加载时显示的 loading 组件 */}
-        <Login />
-      </Suspense>
-      </div>
+          <Login />
+        </Suspense>
+      </BasicLayout>
     ),
   },
   //仪表盘页面
   {
     path: "/dashboard",
     element: (
-      <BasicLayout>
+      <AdminLayout>
         <Suspense fallback={pageLoading}>
           {/* 懒加载时显示的 loading 组件 */}
           <Dashboard />
         </Suspense>
-      </BasicLayout>
+      </AdminLayout>
+    ),
+  },
+  // 用户管理页面
+  {
+    path: "/user",
+    element: (
+      <AdminLayout>
+        <Suspense fallback={pageLoading}>
+          <UserList />
+        </Suspense>
+      </AdminLayout>
     ),
   },
 ];

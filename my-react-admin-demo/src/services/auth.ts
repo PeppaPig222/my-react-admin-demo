@@ -5,7 +5,7 @@
 
 import request from '@/utils/request'; // 导入请求工具
 import { mockLogin, mockGetCurrentUser, mockLogout } from '@/mock/auth'; // 导入模拟登录API
-import type { LoginParams, LoginResult, ApiResponse, User } from '@/types'; // 导入登录参数类型
+import type { LoginParams, LoginResult, ApiResponse, User } from '@/interface'; // 导入登录参数类型
 
 // 判断是否使用模拟数据
 const USE_MOCK = true; // 改为 false 则使用真实后端接口

@@ -3,7 +3,7 @@ import { message } from 'antd';
 // 引入 react-router-dom 中的 useNavigate 钩子,等价于 <Link to="xxx">
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '@/store/useAuthStore'; // 引入Zustand 状态管理钩子,认证全局状态
-import type {LoginParams} from '@/types';
+import type {LoginParams} from '@/interface';
 import LoginForm from '@/components/LoginForm/LoginForm';
 
 /**
