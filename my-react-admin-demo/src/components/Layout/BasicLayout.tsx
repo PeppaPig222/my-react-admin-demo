@@ -28,6 +28,9 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({children}) => {
                 padding: '24px 0', // 内边距24px 0
                 color: '#999',
             }}>
+                默认登陆名：yuchen/admin/user<br />
+                默认密码：1399<br />
+                <br />
                 React Admin Demo © 2026 yuchen
             </footer>
         </div>
